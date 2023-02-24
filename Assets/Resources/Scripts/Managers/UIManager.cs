@@ -28,14 +28,13 @@ public class UIManager
 
         if (sort)
         {
-            canvas.sortingOrder = _oreder;
+            canvas.sortingOrder = _order;
             _order++;
         }
         else
         {
             canvas.sortingOrder = 0;
         }
-        
     }
 
     public T ShowSceneUI<T>(string name = null) where T : UI_Scene
@@ -62,7 +61,7 @@ public class UIManager
         if (parent != null)
             go.transform.SetParent(parent);
 
-        return Util.GetOrAddComponent<TreeSet>(go);
+        return Util.GetOrAddComponent<T>(go);
     }
 
     public T ShowPopupUI<T>(string name = null) where T : UI_Popup
@@ -111,5 +110,11 @@ public class UIManager
         {
             ClosePopupUI();
         }
+    }
+
+    public void Clear()
+    {
+        CloseAllPopupUI();
+        _sceneUI = null;
     }
 }

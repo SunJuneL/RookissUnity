@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
         Managers.Input.MouseAction -= OnMouseClicked;
         Managers.Input.MouseAction += OnMouseClicked;
 
-        Managers.Resources.Instantiate("UI/UI_Button");
+        // Managers.Resources.Instantiate("UI/UI_Button");
     }
 
     // Update is called once per frame

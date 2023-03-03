@@ -58,8 +58,16 @@ public abstract class UI_Base : MonoBehaviour
                 evt.OnDragHandler -= action;
                 evt.OnDragHandler += action;
                 break;
+            case Define.UIEvent.Down:
+                evt.OnDownHandler -= action;
+                evt.OnDownHandler += action;
+                break;
+            case Define.UIEvent.Up:
+                evt.OnUpHandler -= action;
+                evt.OnUpHandler += action;
+                break;
         }
 
-        // evt.OnDragHandler += ((PointerEventData data) => { evt.gameObject.transform.position = data.position; });
+        evt.OnDragHandler += ((PointerEventData data) => { evt.gameObject.transform.position = data.position; });
     }
 }

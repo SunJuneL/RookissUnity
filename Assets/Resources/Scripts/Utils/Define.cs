@@ -35,5 +35,7 @@ public class Define
     {
         Click,
         Drag,
+        Down,
+        Up,
     }
 }

@@ -12,12 +12,21 @@ public class UI_KeyBoard : UI_Scene
 
     GameObject player;
 
+    enum Texts
+    {
+        LeftButtonText,
+        RightButtonText,
+        UpButtonText,
+        DownButtonText,
+        AnnounceText,
+    }
+
     enum Buttons
     {
-        leftButton,
-        rightButton,
-        upButton,
-        downButton,
+        LeftButton,
+        RightButton,
+        UpButton,
+        DownButton,
     }
 
     void Start()
@@ -29,14 +38,36 @@ public class UI_KeyBoard : UI_Scene
     public override void Init()
     {
         base.Init();
-        //Bind<Button>(typeof(Buttons));
+        Bind<Button>(typeof(Buttons));
+        Bind<Text>(typeof(Texts));
 
-        GetButton((int)Buttons.leftButton).gameObject.AddUIEvent(OnButtonClicked);
+        GetButton((int)Buttons.LeftButton).gameObject.AddUIEvent(LeftButtonClicked);
+        GetButton((int)Buttons.RightButton).gameObject.AddUIEvent(RightButtonClicked);
+        GetButton((int)Buttons.UpButton).gameObject.AddUIEvent(UpButtonClicked);
+        GetButton((int)Buttons.DownButton).gameObject.AddUIEvent(DownButtonClicked);
     }
 
-    public void OnButtonClicked(PointerEventData data)
+    void LeftButtonClicked(PointerEventData data)
     {
-        player.transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.left), 0.2f);
-        player.transform.position += Vector3.left * Time.deltaTime * _speed;
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.left), 0.2f);
+        transform.position += Vector3.left * Time.deltaTime * _speed;
+    }
+
+    void RightButtonClicked(PointerEventData data)
+    {
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.right), 0.2f);
+        transform.position += Vector3.right * Time.deltaTime * _speed;
+    }
+
+    void UpButtonClicked(PointerEventData data)
+    {
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.forward), 0.2f);
+        transform.position += Vector3.forward * Time.deltaTime * _speed;
+    }
+
+    void DownButtonClicked(PointerEventData data)
+    {
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.back), 0.2f);
+        transform.position += Vector3.back * Time.deltaTime * _speed;
     }
 }

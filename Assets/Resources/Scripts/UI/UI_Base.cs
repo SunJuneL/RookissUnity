@@ -11,7 +11,7 @@ public abstract class UI_Base : MonoBehaviour
 
     public abstract void Init();
 
-    protected void Bind<T>(Type type) where T : UnityEngine.Object
+    protected void Bind<T>(Type type) where T : UnityEngine.Object  
     {
         string[] names = Enum.GetNames(type);
         UnityEngine.Object[] objects = new UnityEngine.Object[names.Length];
@@ -23,6 +23,7 @@ public abstract class UI_Base : MonoBehaviour
                 objects[i] = Util.FindChild(gameObject, names[i], true);    
             else
                 objects[i] = Util.FindChild<T>(gameObject, names[i], true);
+
 
             if (objects[i] == null)
                 Debug.Log($"Failed to bind({names[i]})");
@@ -59,6 +60,6 @@ public abstract class UI_Base : MonoBehaviour
                 break;
         }
 
-        evt.OnDragHandler += ((PointerEventData data) => { evt.gameObject.transform.position = data.position; });
+        // evt.OnDragHandler += ((PointerEventData data) => { evt.gameObject.transform.position = data.position; });
     }
 }

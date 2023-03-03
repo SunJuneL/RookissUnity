@@ -23,7 +23,7 @@ public class ResourceManager
         if (index > 0)
             go.name = go.name.Substring(0, index);
 
-        return Object.Instantiate(prefab, parent);
+        return go;
     }
 
     public void Destroy(GameObject go)

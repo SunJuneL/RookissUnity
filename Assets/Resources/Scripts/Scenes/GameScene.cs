@@ -16,6 +16,7 @@ public class GameScene : BaseScene
         SceneType = Define.Scene.Game;
 
         Managers.UI.ShowSceneUI<UI_KeyBoard>();
+        // Managers.Resources.Instantiate("UI/Scene/UI_KeyBoard");
     }
 
     public override void Clear()

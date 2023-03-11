@@ -15,4 +15,5 @@ public static class Extension
     {
         UI_Base.AddUIEvent(go, action, type);
     }
+
 }

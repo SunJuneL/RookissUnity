@@ -13,7 +13,7 @@ public class LoginScene : BaseScene
     }
 
     private void Update()
-    {
+    { 
         if (Input.GetKeyDown(KeyCode.Q))
         {
             Managers.Scene.LoadScene(Define.Scene.Game);

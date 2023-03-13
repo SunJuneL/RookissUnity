@@ -33,7 +33,6 @@ public class UI_KeyBoard : UI_Scene
 
     void Start()
     {
-        Init();
         player = GameObject.FindWithTag("Player");
     }
 

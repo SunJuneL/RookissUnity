@@ -15,7 +15,7 @@ public class MonsterController : BaseController
 
     public override void Init()
     {
-         _stat = gameObject.GetComponent<PlayerStat>();
+         _stat = gameObject.GetComponent<Stat>();
 
         if (gameObject.GetComponentInChildren<UI_HPBar>() == null)
             Managers.UI.MakeWorldSpaceUI<UI_HPBar>(transform);
@@ -44,11 +44,12 @@ public class MonsterController : BaseController
         // 몬스터가 내 사정거리 내로 들어오면 공격
         if (_lockTarget != null )
         {
+            _destPos = _lockTarget.transform.position;
             float distance = (_destPos - transform.position).magnitude;
             if (distance <= _attackRange)
             {
-                NavMeshAgent nea = gameObject.GetOrAddComponent<NavMeshAgent>();
-                nea.SetDestination(transform.position);
+                NavMeshAgent nma = gameObject.GetOrAddComponent<NavMeshAgent>();
+                nma.SetDestination(transform.position);
                 State = Define.State.Skill;
                 return;
             }
@@ -62,9 +63,9 @@ public class MonsterController : BaseController
         }
         else
         {
-            NavMeshAgent nea = gameObject.GetOrAddComponent<NavMeshAgent>();
-            nea.SetDestination(_destPos);
-            nea.speed = _stat.MoveSpeed;
+            NavMeshAgent nma = gameObject.GetOrAddComponent<NavMeshAgent>();
+            nma.SetDestination(_destPos);
+            nma.speed = _stat.MoveSpeed;
 
             // transform.position += dir.normalized * moveDist;
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), 10 * Time.deltaTime);
@@ -85,7 +86,7 @@ public class MonsterController : BaseController
 
     void OnHitEvent()
     {
-        if (_lockTarget == null)
+        if (_lockTarget != null)
         {
             Stat targetStat = _lockTarget.GetComponent<Stat>();
             Stat myStat = gameObject.GetComponent<Stat>();

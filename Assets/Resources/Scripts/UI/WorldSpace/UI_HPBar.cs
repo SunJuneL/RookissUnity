@@ -25,7 +25,7 @@ public class UI_HPBar : UI_Base
         transform.rotation = Camera.main.transform.rotation;
 
         float ratio = _stat.Hp / (float)_stat.MaxHp;
-        SetHPRatio(0);
+        SetHPRatio(ratio);
     }
 
     public void SetHPRatio(float ratio)

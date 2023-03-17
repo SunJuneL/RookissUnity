@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Rendering;
 
 public class PlayerController : BaseController
 {
@@ -15,8 +13,8 @@ public class PlayerController : BaseController
     public override void Init()
     {
         _stat = gameObject.GetComponent<PlayerStat>();
-        Managers.Input.KeyAction -= OnKeyBoard;
-        Managers.Input.KeyAction += OnKeyBoard;
+        // Managers.Input.KeyAction -= OnKeyBoard;
+        // Managers.Input.KeyAction += OnKeyBoard;
 
         Managers.Input.MouseAction -= OnMouseEvent;
         Managers.Input.MouseAction += OnMouseEvent;
@@ -59,6 +57,7 @@ public class PlayerController : BaseController
         switch (State)
         {
             case Define.State.Idle:
+                OnMouseEvent_IdleRun(evt);
                 break;
             case Define.State.Moving:
                 OnMouseEvent_IdleRun(evt);
@@ -66,11 +65,10 @@ public class PlayerController : BaseController
             case Define.State.Skill:
                 {
                     if (evt == Define.MouseEvent.PointerUp)
-                        _stopSkill = true; 
+                        _stopSkill = true;
                 }
                 break;
         }
-        
     }
 
     protected override void UpdateMoving()
@@ -78,6 +76,7 @@ public class PlayerController : BaseController
         // 몬스터가 내 사정거리보다 가까우면 공격
         if (_lockTarget != null )
         {
+            _destPos = _lockTarget.transform.position;
             float distance = (_destPos - transform.position).magnitude;
             if (distance <= 1)
             {
@@ -178,7 +177,5 @@ public class PlayerController : BaseController
                 break;
         }
     }
-
-    
 }
 

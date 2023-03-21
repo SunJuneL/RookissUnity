@@ -33,4 +33,29 @@ public class Stat : MonoBehaviour
         _defense = 5;
         _moveSpeed = 5.0f;
     }
+
+    public virtual void OnAttacked(Stat attacker)
+        // 공격력을 int로 받지 않고 Stat으로 받는 이유는 몬스터인지 아닌지 등의 다른 정보를 추출할 수도 있기 때문!
+    {
+        int damage = Mathf.Max(0, attacker.Attack - Defence);
+        Hp -= damage;
+        if (Hp <= 0)
+        {
+            Hp = 0;
+            OnDead(attacker);
+        }
+    }
+
+    protected virtual void OnDead(Stat attacker)
+    {
+        PlayerStat playerStat = attacker as PlayerStat;
+        if (playerStat != null)
+        {
+            playerStat.Exp += 15;
+            // 이렇게 외부에서 접근해 무언가를 바꾸게 하는 사람들도 있다.
+                // 이때 문제점은 나중에 경험치를 추가해주는 부분이 많을 것이다.
+                
+        }
+        Managers.Game.DeSpawn(gameObject);
+    }
 }

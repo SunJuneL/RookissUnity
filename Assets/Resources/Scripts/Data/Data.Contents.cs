@@ -16,8 +16,9 @@ namespace Data
     public class Stat
     {
         public int level;
-        public int hp;
+        public int maxHp;
         public int attack;
+        public int totalExp;
     }
     // 참고로 위 클래스 부분에서 public으로 안하면 읽어들이지 못한다. 그래서 안된다.
     // 만일 public을 안붙여서 private로 하고 싶다면 [SerializeField]를 붙여주면 된다.
